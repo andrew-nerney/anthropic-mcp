@@ -43,13 +43,14 @@ class MCPClient:
 
     async def list_tools(self) -> list[types.Tool]:
         # TODO: Return a list of tools defined by the MCP server
-        return []
+        result = await self.session().list_tools()
+        return result.tools
 
     async def call_tool(
         self, tool_name: str, tool_input: dict
     ) -> types.CallToolResult | None:
-        # TODO: Call a particular tool and return the result
-        return None
+        #Call a particular tool and return the result
+        return await self.session().call_tool(tool_name, tool_input)
 
     async def list_prompts(self) -> list[types.Prompt]:
         # TODO: Return a list of prompts defined by the MCP server
@@ -76,13 +77,16 @@ class MCPClient:
 
 
 # For testing
+# this is a testing harness to run the mcp_server.py in a subprocess and connect to it using the MCPClient.
 async def main():
     async with MCPClient(
         # If using Python without UV, update command to 'python' and remove "run" from args.
         command="uv",
         args=["run", "mcp_server.py"],
     ) as _client:
-        pass
+        result = await _client.list_tools()
+        print(result)
+        #this should start the MCP server in a subprocess and connect to it using the MCPClient. It will then list the tools defined by the server and print them to the console.
 
 
 if __name__ == "__main__":
