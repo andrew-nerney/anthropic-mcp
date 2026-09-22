@@ -44,7 +44,8 @@ class Claude:
             "model": self.model,
             "max_tokens": 8000,
             "messages": messages,
-            "temperature": temperature,
+            # Disabled because anthropic 1.8.0 does not accept temperature.
+            # "temperature": temperature,
             "stop_sequences": stop_sequences,
         }
 
