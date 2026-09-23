@@ -59,7 +59,7 @@ def get_doc_contents(doc_id: str) -> str:
     if doc_id not in docs:
         raise ValueError(f"Document with ID '{doc_id}' not found.")
     return docs[doc_id]
-)
+
 
 
 # TODO: Write a prompt to rewrite a doc in markdown format
