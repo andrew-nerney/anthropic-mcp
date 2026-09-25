@@ -1,3 +1,4 @@
+from prompt_toolkit import prompt
 from pydantic import Field
 from mcp.server.fastmcp import FastMCP
 from mcp.server.fastmcp.prompts import base
@@ -68,8 +69,7 @@ def get_doc_contents(doc_id: str) -> str:
 )
 def format_document(
     doc_id: str=Field(description="ID of the document to format.")
-    )
-    -> list[base.Message]:
+    ) -> list[base.Message]:
     prompt = f"""
     Your goal is to reformat a document to be written with markdown syntax.
 
@@ -83,8 +83,10 @@ def format_document(
     Use the 'edit_document' tool to edit the document. After the document has been reformatted...
     """
 
-    return 
+    return [
         base.UserMessage(prompt)
+    ]
+
 
 # TODO: Write a prompt to summarize a doc
 
